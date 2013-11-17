@@ -19,7 +19,7 @@ chmod +x start
 
 cnt=0
 while [ ! -e RUNNING_PID ]; do
-    BUILD_ID=donotKillMe nohup ./start -Dconfig.resource=stage.conf -DapplyEvolutions.default=true -Djava.net.preferIPv4Stack=true >stdout 2>stderr &
+    BUILD_ID=donotKillMe nohup ./start -Dconfig.resource=stage.conf -DapplyEvolutions.default=true -DapplyDownEvolutions.default=true -Djava.net.preferIPv4Stack=true >stdout 2>stderr &
 
     cnt=$((cnt+1))
     if [ $cnt -gt 10 ]
