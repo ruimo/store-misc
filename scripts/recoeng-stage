@@ -1,0 +1,25 @@
+#!/bin/sh -x
+
+wget http://www.ruimo.com/dist/recoeng-${RECOENG_VERSION}.zip
+unzip -q recoeng-${RECOENG_VERSION}.zip
+cd recoeng-${RECOENG_VERSION}
+
+for r in `find . -name RUNNING_PID`; do
+  kill `cat $r`
+done
+
+sleep 15
+
+cnt=0
+while [ ! -e RUNNING_PID ]; do
+    BUILD_ID=donotKillMe nohup bin/recoeng -DapplyEvolutions.default=true -Djava.net.preferIPv4Stack=true >stdout 2>stderr &
+
+    cnt=$((cnt+1))
+    if [ $cnt -gt 10 ]
+    then
+        echo "Cannot start applicaiont!"
+        exit 1
+    fi
+    
+    sleep 20
+done
