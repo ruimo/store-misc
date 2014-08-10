@@ -12,7 +12,7 @@ sleep 15
 
 cnt=0
 while [ ! -e RUNNING_PID ]; do
-    BUILD_ID=donotKillMe nohup bin/recoeng -DapplyEvolutions.default=true -Djava.net.preferIPv4Stack=true >stdout 2>stderr &
+    BUILD_ID=donotKillMe nohup bin/recoeng -DapplyEvolutions.default=true -Djava.net.preferIPv4Stack=true -Dhttp.port=9001 >stdout 2>stderr &
 
     cnt=$((cnt+1))
     if [ $cnt -gt 10 ]
