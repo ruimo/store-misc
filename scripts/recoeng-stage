@@ -1,14 +1,15 @@
 #!/bin/sh -x
 
-wget http://www.ruimo.com/dist/recoeng-${RECOENG_VERSION}.zip
-unzip -q recoeng-${RECOENG_VERSION}.zip
-cd recoeng-${RECOENG_VERSION}
-
 for r in `find . -name RUNNING_PID`; do
   kill `cat $r`
 done
 
 sleep 15
+
+wget http://www.ruimo.com/dist/recoeng-${RECOENG_VERSION}.zip
+rm -rf recoeng-${RECOENG_VERSION}
+unzip -q recoeng-${RECOENG_VERSION}.zip
+cd recoeng-${RECOENG_VERSION}
 
 cnt=0
 while [ ! -e RUNNING_PID ]; do
