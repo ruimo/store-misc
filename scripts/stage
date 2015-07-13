@@ -15,11 +15,11 @@ sleep 30
 rm -rf store-*
 unzip -q ${file}
 cd store-${STORE_STAGE_VERSION}
-chmod +x store
+chmod +x bin/store
 
 cnt=0
 while [ ! -e RUNNING_PID ]; do
-    BUILD_ID=donotKillMe nohup ./store -Dconfig.resource=stage.conf -DapplyEvolutions.default=true -DapplyDownEvolutions.default=true -Djava.net.preferIPv4Stack=true >stdout 2>stderr &
+    BUILD_ID=donotKillMe nohup bin/store -Dconfig.resource=stage.conf -DapplyEvolutions.default=true -DapplyDownEvolutions.default=true -Djava.net.preferIPv4Stack=true >stdout 2>stderr &
 
     cnt=$((cnt+1))
     if [ $cnt -gt 10 ]
